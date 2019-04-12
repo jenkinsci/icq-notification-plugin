@@ -1,0 +1,16 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core"  xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry title="Message" field="message">
+        <f:textarea/>
+    </f:entry>
+    <f:entry title="Recipients">
+        <f:repeatable field="recipients" minimum="1">
+            <table width="90%">
+                <f:entry title="ID" field="id">
+                    <f:textbox/>
+                </f:entry>
+            </table>
+            <f:repeatableDeleteButton />
+        </f:repeatable>
+    </f:entry>
+</j:jelly>

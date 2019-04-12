@@ -1,0 +1,24 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+
+    <style>
+        .t1 {
+        width: 25px;
+        display: inline-block;
+        }
+        .t2 {
+        width: 50%;
+        display: inline-block;
+        }
+        .t3 {
+        width: 25%;
+        display: inline-block;
+        }
+    </style>
+
+    <f:section title="ICQ Bot">
+        <f:entry title="Token" field="token" help="/plugin/icq-notifications/help-bot-token.html">
+            <f:textbox/>
+        </f:entry>
+    </f:section>
+</j:jelly>
