@@ -17,11 +17,11 @@ description = "The plugin allows to send Jenkins notifications to ICQ"
 jenkinsPlugin {
   coreVersion = "2.68"
 
-  shortName = "icq-notifications"
-  displayName = "ICQ Notifications plugin"
+  shortName = "icq-notification"
+  displayName = "ICQ Notification Plugin"
 
   url = "https://wiki.jenkins.io/display/JENKINS/ICQ+Notification+Plugin"
-  gitHubUrl = "https://github.com/nolequen/icq-notifications-plugin"
+  gitHubUrl = "https://github.com/nolequen/icq-notification-plugin"
 
   compatibleSinceVersion = "1.1.0"
 
