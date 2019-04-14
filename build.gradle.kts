@@ -21,7 +21,7 @@ jenkinsPlugin {
   displayName = "ICQ Notification Plugin"
 
   url = "https://wiki.jenkins.io/display/JENKINS/ICQ+Notification+Plugin"
-  gitHubUrl = "https://github.com/nolequen/icq-notification-plugin"
+  gitHubUrl = "https://github.com/jenkinsci/icq-notification-plugin"
 
   compatibleSinceVersion = "1.1.0"
 
