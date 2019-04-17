@@ -3,7 +3,7 @@ The plugin allows to send Jenkins notifications to ICQ
                    
 ## Install from Plugin Manager
 * Open *<your_jenkins>/pluginManager/available*
-* Find and install **ICQ Notifier**
+* Find and install **ICQ Notification**
 
 ## Build and install
 * Run `gradle jpi` to build the plugin. The resulting *icq-notification.hpi* file will created in *./build/libs/*
