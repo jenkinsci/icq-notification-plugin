@@ -17,7 +17,7 @@
     </style>
 
     <f:section title="ICQ Bot">
-        <f:entry title="Token" field="token" help="/plugin/icq-notifications/help-bot-token.html">
+        <f:entry title="Token" field="token" help="/plugin/icq-notification/help-bot-token.html">
             <f:textbox/>
         </f:entry>
     </f:section>
