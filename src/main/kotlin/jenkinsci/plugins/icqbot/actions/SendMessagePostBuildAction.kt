@@ -14,6 +14,7 @@ import hudson.tasks.Publisher
 import jenkins.tasks.SimpleBuildStep
 import jenkinsci.plugins.icqbot.ICQBot
 import jenkinsci.plugins.icqbot.ICQRecipient
+import jenkinsci.plugins.icqbot.Message
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.jenkinsci.Symbol
 import org.kohsuke.stapler.DataBoundConstructor
@@ -24,6 +25,7 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate")
 class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   val message: String
+  val filepath: String
   val recipients: List<ICQRecipient>
   private val active = HashSet<Result>()
 
@@ -36,12 +38,14 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
 
   @DataBoundConstructor
   constructor(message: String,
+              filepath: String,
               recipients: List<ICQRecipient>,
               succeeded: Boolean,
               unstable: Boolean,
               failed: Boolean,
               aborted: Boolean) {
     this.message = message
+    this.filepath = filepath
     this.recipients = recipients
     activate(succeeded, Result.SUCCESS)
     activate(unstable, Result.UNSTABLE)
@@ -53,6 +57,7 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
               recipients: List<ICQRecipient>,
               active: Set<Result>) {
     this.message = message
+    this.filepath = ""
     this.recipients = recipients
     this.active.addAll(active)
   }
@@ -67,7 +72,7 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
                        launcher: Launcher,
                        listener: TaskListener) {
     if (run.getResult()?.let { active(it) } == true) {
-      ICQBot.send(message, recipients, run, path, listener)
+      ICQBot.send(Message(message, filepath, run, path, listener), recipients)
     }
   }
 
