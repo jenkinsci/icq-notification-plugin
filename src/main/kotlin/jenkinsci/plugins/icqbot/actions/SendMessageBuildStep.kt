@@ -11,6 +11,7 @@ import hudson.tasks.Builder
 import jenkins.tasks.SimpleBuildStep
 import jenkinsci.plugins.icqbot.ICQBot
 import jenkinsci.plugins.icqbot.ICQRecipient
+import jenkinsci.plugins.icqbot.Message
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kohsuke.stapler.DataBoundConstructor
 import java.io.IOException
@@ -20,6 +21,7 @@ import java.io.IOException
 class SendMessageBuildStep @DataBoundConstructor
 constructor(
     val message: String,
+    val filepath: String,
     val recipients: List<ICQRecipient>
 ) : Builder(), SimpleBuildStep {
 
@@ -28,7 +30,7 @@ constructor(
                        path: FilePath,
                        launcher: Launcher,
                        listener: TaskListener) {
-    ICQBot.send(message, recipients, run, path, listener)
+    ICQBot.send(Message(message, filepath, run, path, listener), recipients, listener.logger)
   }
 
   @Extension

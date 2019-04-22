@@ -3,6 +3,9 @@
     <f:entry title="Message" field="message">
         <f:textarea/>
     </f:entry>
+    <f:entry title="Filepath" field="filepath" help="/plugin/icq-notification/help-message-file.html">
+        <f:textbox/>
+    </f:entry>
     <f:entry title="Recipients">
         <f:repeatable field="recipients" minimum="1">
             <table width="90%">

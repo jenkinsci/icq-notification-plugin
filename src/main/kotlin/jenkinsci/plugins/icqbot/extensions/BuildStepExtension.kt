@@ -12,11 +12,12 @@ import java.util.*
 @Extension(optional = true)
 class BuildStepExtension : ContextExtensionPoint() {
 
+  @Suppress("EXPERIMENTAL_API_USAGE")
   @DslExtensionMethod(context = StepContext::class)
   fun message(runnable: Runnable): Any {
     val context = BuilderContext()
     ContextExtensionPoint.executeInContext(runnable, context)
-    return SendMessageBuildStep(context.message, context.recipients)
+    return SendMessageBuildStep(context.message, "", context.recipients)
   }
 
   private class BuilderContext : Context {
