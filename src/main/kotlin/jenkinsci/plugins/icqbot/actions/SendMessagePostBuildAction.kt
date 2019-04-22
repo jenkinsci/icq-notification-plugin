@@ -72,7 +72,7 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
                        launcher: Launcher,
                        listener: TaskListener) {
     if (run.getResult()?.let { active(it) } == true) {
-      ICQBot.send(Message(message, filepath, run, path, listener), recipients)
+      ICQBot.send(Message(message, filepath, run, path, listener), recipients, listener.logger)
     }
   }
 

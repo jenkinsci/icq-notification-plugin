@@ -30,7 +30,7 @@ constructor(
                        path: FilePath,
                        launcher: Launcher,
                        listener: TaskListener) {
-    ICQBot.send(Message(message, filepath, run, path, listener), recipients)
+    ICQBot.send(Message(message, filepath, run, path, listener), recipients, listener.logger)
   }
 
   @Extension

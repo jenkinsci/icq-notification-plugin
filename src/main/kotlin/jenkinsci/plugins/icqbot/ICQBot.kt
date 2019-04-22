@@ -17,33 +17,30 @@ import org.jenkinsci.plugins.tokenmacro.MacroEvaluationException
 import su.nlq.icq.bot.Bot
 import su.nlq.icq.bot.PenPal
 import java.io.IOException
+import java.io.PrintStream
 import java.util.concurrent.atomic.AtomicReference
-import java.util.logging.Level
-import java.util.logging.Logger
 
 @ObsoleteCoroutinesApi
 object ICQBot {
-  private val log = Logger.getLogger("icq-notifier")
-
   private val asyncScope = CoroutineScope(newSingleThreadContext("icq-notifier"))
   private val httpClient = httpClient(ProxyConfiguration.load())
   private val token = AtomicReference<String>()
 
   @Throws(IOException::class, InterruptedException::class)
-  fun send(message: Message, recipients: List<ICQRecipient>) {
+  fun send(message: Message, recipients: List<ICQRecipient>, log: PrintStream) {
     token.get()?.let { Bot(it, httpClient) }?.also { bot ->
       try {
         val content = message.content
-        log.info("Sending \"$content\" message to $recipients")
+        log.println("Sending \"$content\" message to $recipients")
         recipients.map { PenPal(it.id) }.forEach {
           asyncScope.launch {
             bot.conversation(it).message(content).onFailure {
-              log.warning("Failed to send message to $it")
+              log.println("Failed to send message to $it")
             }
           }
         }
       } catch (e: MacroEvaluationException) {
-        log.log(Level.SEVERE, "Failed to expand message: \"$message\"", e)
+        log.println("Failed to expand message: \"$message\": ${e.message}")
       }
     }
   }
