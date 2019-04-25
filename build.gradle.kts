@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "org.jenkins-ci.plugins"
-version = "1.1.0"
+version = "1.2.0"
 description = "The plugin allows to send Jenkins notifications to ICQ"
 
 jenkinsPlugin {
@@ -23,7 +23,7 @@ jenkinsPlugin {
   url = "https://wiki.jenkins.io/display/JENKINS/ICQ+Notification+Plugin"
   gitHubUrl = "https://github.com/jenkinsci/icq-notification-plugin"
 
-  compatibleSinceVersion = "1.1.0"
+  compatibleSinceVersion = "${project.version}"
 
   developers = this.Developers().apply {
     developer(delegateClosureOf<JpiDeveloper> {
