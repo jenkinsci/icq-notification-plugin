@@ -12,11 +12,9 @@ import jenkins.tasks.SimpleBuildStep
 import jenkinsci.plugins.icqbot.ICQBot
 import jenkinsci.plugins.icqbot.ICQRecipient
 import jenkinsci.plugins.icqbot.Message
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.kohsuke.stapler.DataBoundConstructor
 import java.io.IOException
 
-@ObsoleteCoroutinesApi
 @Suppress("MemberVisibilityCanBePrivate")
 class SendMessageBuildStep @DataBoundConstructor
 constructor(

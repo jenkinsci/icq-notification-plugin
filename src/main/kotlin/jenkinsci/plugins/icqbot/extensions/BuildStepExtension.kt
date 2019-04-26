@@ -12,7 +12,6 @@ import java.util.*
 @Extension(optional = true)
 class BuildStepExtension : ContextExtensionPoint() {
 
-  @Suppress("EXPERIMENTAL_API_USAGE")
   @DslExtensionMethod(context = StepContext::class)
   fun message(runnable: Runnable): Any {
     val context = BuilderContext()
