@@ -6,7 +6,6 @@ import io.ktor.client.engine.apache.Apache
 import io.ktor.client.features.json.JacksonSerializer
 import io.ktor.client.features.json.JsonFeature
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import org.apache.http.HttpHost
@@ -20,8 +19,8 @@ import java.io.IOException
 import java.io.PrintStream
 import java.util.concurrent.atomic.AtomicReference
 
-@ObsoleteCoroutinesApi
 object ICQBot {
+  @Suppress("EXPERIMENTAL_API_USAGE")
   private val asyncScope = CoroutineScope(newSingleThreadContext("icq-notifier"))
   private val httpClient = httpClient(ProxyConfiguration.load())
   private val token = AtomicReference<String>()
@@ -32,10 +31,10 @@ object ICQBot {
       try {
         val content = message.content
         log.println("Sending \"$content\" message to $recipients")
-        recipients.map { PenPal(it.id) }.forEach {
+        recipients.map { bot.conversation(PenPal(it.id)) }.forEach {
           asyncScope.launch {
-            bot.conversation(it).message(content).onFailure {
-              log.println("Failed to send message to $it")
+            it.message(content).onFailure {
+              log.println("Failed to send message: $it")
             }
           }
         }

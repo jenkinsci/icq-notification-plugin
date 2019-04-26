@@ -14,10 +14,15 @@ class Message(
     private val listener: TaskListener
 ) {
   val content: String
-    get() = expand(if (filepath.isBlank()) {
-      template
-    } else {
-      File(expand("\${WORKSPACE}/$filepath")).readText()
+    get() = expand(when {
+      !filepath.isBlank() -> {
+        val file = File(expand("\${WORKSPACE}/$filepath"))
+        when {
+          file.exists() -> file.readText()
+          else -> template
+        }
+      }
+      else -> template
     })
 
   override fun toString() = "Message('$template', '$filepath')"

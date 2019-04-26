@@ -15,13 +15,11 @@ import jenkins.tasks.SimpleBuildStep
 import jenkinsci.plugins.icqbot.ICQBot
 import jenkinsci.plugins.icqbot.ICQRecipient
 import jenkinsci.plugins.icqbot.Message
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 import org.jenkinsci.Symbol
 import org.kohsuke.stapler.DataBoundConstructor
 import java.io.IOException
 import java.util.*
 
-@ObsoleteCoroutinesApi
 @Suppress("MemberVisibilityCanBePrivate")
 class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   val message: String

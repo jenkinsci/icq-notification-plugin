@@ -61,6 +61,8 @@ dependencies {
   compileOnly("javax.servlet", "servlet-api", "2.5")
 
   kapt("net.java.sezpoz", "sezpoz", "1.13")
+
+  testCompile("org.jenkins-ci.main", "jenkins-test-harness", "2.49")
 }
 
 kapt {

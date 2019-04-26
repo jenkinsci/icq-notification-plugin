@@ -12,7 +12,6 @@ import java.util.*
 @Extension(optional = true)
 class PublisherExtension : ContextExtensionPoint() {
 
-  @Suppress("EXPERIMENTAL_API_USAGE")
   @DslExtensionMethod(context = javaposse.jobdsl.dsl.helpers.publisher.PublisherContext::class)
   fun message(runnable: Runnable): SendMessagePostBuildAction {
     val context = PublisherContext()
