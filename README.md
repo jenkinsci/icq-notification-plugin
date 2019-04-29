@@ -1,6 +1,7 @@
 # ICQ plugin for Jenkins                                                                                                                                                         
 [![Plugin Version](https://img.shields.io/jenkins/plugin/v/icq-notification.svg)](https://plugins.jenkins.io/icq-notification)
 [![Build Status](https://ci.jenkins.io/job/plugins/job/icq-notification-plugin/job/master/badge/icon)](https://ci.jenkins.io/job/plugins/job/icq-notification-plugin/job/master/)
+[![Сodebeat](https://codebeat.co/badges/36f4b8ec-53a3-4926-bd8e-fa4abe9a291e)](https://codebeat.co/projects/github-com-jenkinsci-icq-notification-plugin-master)
 
 The plugin allows to send Jenkins notifications to ICQ
                    
