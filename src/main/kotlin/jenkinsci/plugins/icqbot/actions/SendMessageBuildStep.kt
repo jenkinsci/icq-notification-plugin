@@ -19,7 +19,7 @@ import java.io.IOException
 class SendMessageBuildStep @DataBoundConstructor
 constructor(
     val message: String,
-    val filepath: String,
+    val filepath: String?,
     val recipients: List<ICQRecipient>
 ) : Builder(), SimpleBuildStep {
 
