@@ -23,7 +23,7 @@ import java.util.*
 @Suppress("MemberVisibilityCanBePrivate")
 class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   val message: String
-  val filepath: String
+  val filepath: String?
   val recipients: List<ICQRecipient>
   private val active = HashSet<Result>()
 
@@ -36,7 +36,7 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
 
   @DataBoundConstructor
   constructor(message: String,
-              filepath: String,
+              filepath: String?,
               recipients: List<ICQRecipient>,
               succeeded: Boolean,
               unstable: Boolean,

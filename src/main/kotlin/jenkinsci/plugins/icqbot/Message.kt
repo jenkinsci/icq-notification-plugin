@@ -8,14 +8,14 @@ import java.io.File
 
 class Message(
     private val template: String,
-    private val filepath: String,
+    private val filepath: String?,
     private val run: Run<*, *>,
     private val path: FilePath,
     private val listener: TaskListener
 ) {
   val content: String
     get() = expand(when {
-      !filepath.isBlank() -> {
+      !filepath.isNullOrBlank() -> {
         val file = File(expand("\${WORKSPACE}/$filepath"))
         when {
           file.exists() -> file.readText()
