@@ -7,7 +7,6 @@ import javaposse.jobdsl.plugin.ContextExtensionPoint
 import javaposse.jobdsl.plugin.DslExtensionMethod
 import jenkinsci.plugins.icqbot.ICQRecipient
 import jenkinsci.plugins.icqbot.actions.SendMessagePostBuildAction
-import java.util.*
 
 @Extension(optional = true)
 class PublisherExtension : ContextExtensionPoint() {
@@ -20,8 +19,8 @@ class PublisherExtension : ContextExtensionPoint() {
   }
 
   private class PublisherContext : Context {
-    val recipients = ArrayList<ICQRecipient>()
-    val active = HashSet<Result>()
+    val recipients = mutableListOf<ICQRecipient>()
+    val active = mutableSetOf<Result>()
     var message = ""
 
     fun message(value: String) {

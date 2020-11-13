@@ -16,30 +16,21 @@ import org.kohsuke.stapler.DataBoundConstructor
 import java.io.IOException
 
 @Suppress("MemberVisibilityCanBePrivate")
-class SendMessageBuildStep @DataBoundConstructor
-constructor(
-    val message: String,
-    val filepath: String?,
-    val recipients: List<ICQRecipient>
+class SendMessageBuildStep @DataBoundConstructor constructor(
+  val message: String,
+  val filepath: String?,
+  val recipients: List<ICQRecipient>
 ) : Builder(), SimpleBuildStep {
 
   @Throws(InterruptedException::class, IOException::class)
-  override fun perform(run: Run<*, *>,
-                       path: FilePath,
-                       launcher: Launcher,
-                       listener: TaskListener) {
-    ICQBot.send(Message(message, filepath, run, path, listener), recipients, listener.logger)
-  }
+  override fun perform(run: Run<*, *>, path: FilePath, launcher: Launcher, listener: TaskListener) =
+    ICQBot.send(Message(message, filepath, run, path, listener), recipients)
 
   @Extension
   class SendMessageBuildStepDescriptor : BuildStepDescriptor<Builder>() {
 
-    override fun isApplicable(jobType: Class<out AbstractProject<*, *>>): Boolean {
-      return true
-    }
+    override fun isApplicable(jobType: Class<out AbstractProject<*, *>>) = true
 
-    override fun getDisplayName(): String {
-      return "Send message to ICQ"
-    }
+    override fun getDisplayName() = "Send message to ICQ or MyTeam"
   }
 }

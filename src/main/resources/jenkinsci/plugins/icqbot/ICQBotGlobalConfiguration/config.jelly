@@ -16,8 +16,11 @@
         }
     </style>
 
-    <f:section title="ICQ Bot">
+    <f:section title="ICQ and MyTeam">
         <f:entry title="Token" field="token" help="/plugin/icq-notification/help-bot-token.html">
+            <f:textbox/>
+        </f:entry>
+        <f:entry title="API URL" field="api" help="/plugin/icq-notification/help-bot-api.html">
             <f:textbox/>
         </f:entry>
     </f:section>

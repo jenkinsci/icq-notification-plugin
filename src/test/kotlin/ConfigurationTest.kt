@@ -30,6 +30,7 @@ class ConfigurationTest {
 
     //then
     WebAssert.assertInputPresent(page, "_.token")
+    WebAssert.assertInputPresent(page, "_.api")
   }
 
   @Test

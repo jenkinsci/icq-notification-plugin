@@ -18,14 +18,14 @@ import jenkinsci.plugins.icqbot.Message
 import org.jenkinsci.Symbol
 import org.kohsuke.stapler.DataBoundConstructor
 import java.io.IOException
-import java.util.*
 
 @Suppress("MemberVisibilityCanBePrivate")
 class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   val message: String
   val filepath: String?
   val recipients: List<ICQRecipient>
-  private val active = HashSet<Result>()
+
+  private val active = mutableSetOf<Result>()
 
   val isSucceeded: Boolean get() = active(Result.SUCCESS)
   val isUnstable: Boolean get() = active(Result.UNSTABLE)
@@ -35,13 +35,15 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   private fun active(result: Result) = active.contains(result)
 
   @DataBoundConstructor
-  constructor(message: String,
-              filepath: String?,
-              recipients: List<ICQRecipient>,
-              succeeded: Boolean,
-              unstable: Boolean,
-              failed: Boolean,
-              aborted: Boolean) {
+  constructor(
+    message: String,
+    filepath: String?,
+    recipients: List<ICQRecipient>,
+    succeeded: Boolean,
+    unstable: Boolean,
+    failed: Boolean,
+    aborted: Boolean
+  ) {
     this.message = message
     this.filepath = filepath
     this.recipients = recipients
@@ -51,26 +53,28 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
     activate(aborted, Result.ABORTED)
   }
 
-  constructor(message: String,
-              recipients: List<ICQRecipient>,
-              active: Set<Result>) {
+  constructor(
+    message: String,
+    recipients: List<ICQRecipient>,
+    active: Set<Result>
+  ) {
     this.message = message
     this.filepath = ""
     this.recipients = recipients
     this.active.addAll(active)
   }
 
-  override fun getRequiredMonitorService(): BuildStepMonitor {
-    return BuildStepMonitor.NONE
-  }
+  override fun getRequiredMonitorService() = BuildStepMonitor.NONE
 
   @Throws(InterruptedException::class, IOException::class)
-  override fun perform(run: Run<*, *>,
-                       path: FilePath,
-                       launcher: Launcher,
-                       listener: TaskListener) {
+  override fun perform(
+    run: Run<*, *>,
+    path: FilePath,
+    launcher: Launcher,
+    listener: TaskListener
+  ) {
     if (run.getResult()?.let { active(it) } == true) {
-      ICQBot.send(Message(message, filepath, run, path, listener), recipients, listener.logger)
+      ICQBot.send(Message(message, filepath, run, path, listener), recipients)
     }
   }
 
@@ -84,12 +88,8 @@ class SendMessagePostBuildAction : Notifier, SimpleBuildStep {
   @Symbol("icqMessage")
   class SendMessagePostBuildActionDescriptor : BuildStepDescriptor<Publisher>() {
 
-    override fun isApplicable(jobType: Class<out AbstractProject<*, *>>): Boolean {
-      return true
-    }
+    override fun isApplicable(jobType: Class<out AbstractProject<*, *>>) = true
 
-    override fun getDisplayName(): String {
-      return "Send message to ICQ"
-    }
+    override fun getDisplayName() = "Send message to ICQ or MyTeam"
   }
 }
